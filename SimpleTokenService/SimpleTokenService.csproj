@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>DannyBoyNg.Services</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>DannyBoyNg.SimpleTokenService</PackageId>
+    <Authors>DannyBoyNg</Authors>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>logo.png</PackageIcon>
+    <Description>A service to create and validate simple tokens in C#. Example use case: A simple token can be used to confirm if a user owns an email address. You send a simple token to a users email address. If that user can present the same token back to you, then you know the user owns that email address.</Description>
+    <PackageProjectUrl>https://github.com/DannyBoyNg/SimpleTokenService</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DannyBoyNg/SimpleTokenService.git</RepositoryUrl>
+    <PackageTags>simple tokens create validate simpletoken cooldown expiration</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\UserAgentService\UserAgentService\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
