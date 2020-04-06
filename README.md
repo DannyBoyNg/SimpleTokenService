@@ -10,7 +10,7 @@ Microsoft.Extensions.Options
 
 Install from Nuget
 ```
-Install-Package DannyBoyNg.SimpleTokenService
+Install-Package Ng.SimpleTokenService
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ Install-Package DannyBoyNg.SimpleTokenService
 Console application
 
 ```csharp
-using DannyBoyNg.Services;
+using Ng.Services;
 ...
 //Example implementation of an inMemory repository for refresh tokens. In production, you would use a database store and not an inMemory store.
 ISimpleTokenRepository inMemoryRepository = new MyInMemorySimpleTokenRepository(); //Never use this in production
@@ -46,7 +46,7 @@ simpleTokenService.StoreToken(userId, simpleToken);
 simpleTokenService.ValidateToken(userId, simpleToken);
 ```
 
-Example of an inMemory simpleToken repository (never use in production)
+Example of an inMemory simpleToken repository (never use in production). Use a database store instead.
 
 ```csharp
 public class MyInMemorySimpleTokenRepository : ISimpleTokenRepository
@@ -86,7 +86,7 @@ ASP.NET Core
 
 Register service with dependency injection in Startup.cs
 ```csharp
-using DannyBoyNg.Services;
+using Ng.Services;
 ...
 public void ConfigureServices(IServiceCollection services)
 {
@@ -95,14 +95,14 @@ public void ConfigureServices(IServiceCollection services)
         options.CooldownPeriodInMinutes = 5; //Default: 5
         options.TokenExpirationInMinutes = 1440; //Default: 1440 (1 Day). Set to 0 to never expire
     });
-    //Make sure you provide you own implementation of ISimpleTokenRepository
+    //Make sure you provide you own implementation of ISimpleTokenRepository. Replace MyInMemorySimpleTokenRepository with your own repository.
     services.AddScoped<ISimpleTokenRepository, MyInMemorySimpleTokenRepository>();
 }
 ```
 
 Inject ISimpleTokenService into a Controller or wherever you like
 ```csharp
-using DannyBoyNg.Services;
+using Ng.Services;
 ...
 public class MyController
 {

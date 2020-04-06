@@ -2,12 +2,12 @@
 using System;
 using System.Linq;
 
-namespace DannyBoyNg.Services
+namespace Ng.Services
 {
     /// <summary>
     /// The simple token service
     /// </summary>
-    /// <seealso cref="DannyBoyNg.Services.ISimpleTokenService" />
+    /// <seealso cref="Ng.Services.ISimpleTokenService" />
     public class SimpleTokenService : ISimpleTokenService
     {
         /// <summary>

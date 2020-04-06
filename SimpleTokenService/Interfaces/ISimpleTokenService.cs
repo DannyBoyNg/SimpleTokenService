@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DannyBoyNg.Services
+namespace Ng.Services
 {
     /// <summary>
     /// Default interface for simple token service

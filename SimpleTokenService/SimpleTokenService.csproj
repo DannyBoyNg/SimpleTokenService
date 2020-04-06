@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>DannyBoyNg.Services</RootNamespace>
+    <RootNamespace>Ng.Services</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>DannyBoyNg.SimpleTokenService</PackageId>
+    <PackageId>Ng.SimpleTokenService</PackageId>
     <Authors>DannyBoyNg</Authors>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
