@@ -3,7 +3,7 @@
     /// <summary>
     /// The simple token settings
     /// </summary>
-    public class SimpleTokenSettings
+    public record SimpleTokenSettings
     {
         /// <summary>
         /// Gets or sets the token expiration in minutes. default 1440 = 1 day
