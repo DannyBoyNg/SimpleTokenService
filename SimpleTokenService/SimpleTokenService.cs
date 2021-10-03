@@ -75,7 +75,7 @@ namespace Ng.Services
             var tokenExpired = false;
             var tokens = SimpleTokenRepo.GetByUserId(userId);
             //Remove expired simple tokens from db
-            foreach (var token in tokens)
+            foreach (var token in tokens.ToList())
             {
                 if (IsExpired(token.Token))
                 {
