@@ -15,7 +15,7 @@ Install-Package Ng.SimpleTokenService
 
 ## Usage
 
-Console application
+**Console application**
 
 ```csharp
 using Ng.Services;
@@ -82,7 +82,7 @@ public class SimpleToken : ISimpleToken
 }
 ```
 
-ASP.NET Core
+**ASP.NET Core**
 
 Register service with dependency injection in Startup.cs
 ```csharp
@@ -112,6 +112,77 @@ public class MyController
         
     }
 }
+```
+**More examples**
+
+An example using a database (this example was provided by user @faina09)
+```csharp
+    internal class MySqlSimpleTokenRepository : ISimpleTokenRepository
+    {
+        protected readonly DbContext _myDbContext;
+        private DbSet<SimpleSqlToken> SimpleTokenDbSet { get; set; }
+
+        public MySqlSimpleTokenRepository()
+        {
+            string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=MyDbName;Integrated Security=True";
+            var options = GetOptions(connectionString);
+            _myDbContext = new MyDbContext(options);
+            SimpleTokenDbSet = _myDbContext.Set<SimpleSqlToken>();
+        }
+
+        public DbContextOptions<MyDbContext> GetOptions(string connectionString)
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder<MyDbContext>(), connectionString).Options;
+        }
+
+        public void Delete(ISimpleToken simpleToken)
+        {
+            var item = SimpleTokenDbSet.Where(x => x.Token == simpleToken.Token && x.UserId == simpleToken.UserId).SingleOrDefault();
+            if (item != null) SimpleTokenDbSet.Remove(item);
+            _myDbContext.SaveChanges();
+        }
+
+        public IEnumerable<ISimpleToken> GetByUserId(int userId)
+        {
+            return SimpleTokenDbSet.Where(x => x.UserId == userId);
+        }
+
+        public void Insert(int userId, string simpleToken)
+        {
+            SimpleTokenDbSet.Add(new SimpleSqlToken { UserId = userId, Token = simpleToken });
+            _myDbContext.SaveChanges();
+        }
+    }
+
+    public partial class MyDbContext : DbContext
+    {
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        {
+        }
+
+        public virtual DbSet<SimpleSqlToken> SimpleSqlToken { get; set; }
+    }
+
+    [Table("SimpleToken")]
+    public class SimpleSqlToken : ISimpleToken
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Token { get; set; }
+        public int UserId { get; set; }
+    }
+```
+
+Table was created with
+```sql
+CREATE TABLE [dbo].[SimpleToken](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[Token] [varchar](250) NULL,
+ CONSTRAINT [PK_SimpleToken] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)
 ```
 
 ## License
